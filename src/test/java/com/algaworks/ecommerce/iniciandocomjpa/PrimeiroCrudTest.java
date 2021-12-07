@@ -12,7 +12,7 @@ public class PrimeiroCrudTest extends EntityManagerTest {
 	public void createRegistro() {
 		Cliente cliente = new Cliente();
 		
-		cliente.setId(3);
+//		cliente.setId(3); Comentado pq passou a utilizar IDENTITY id
 		cliente.setNome("Sergio Pereira");
 		
 		entityManager.getTransaction().begin();
