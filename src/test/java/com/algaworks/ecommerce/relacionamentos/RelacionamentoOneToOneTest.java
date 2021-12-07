@@ -1,31 +1,57 @@
 package com.algaworks.ecommerce.relacionamentos;
 
-import java.util.Arrays;
+import java.util.Date;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.algaworks.ecommerce.EntityManagerTest;
-import com.algaworks.ecommerce.model.Categoria;
-import com.algaworks.ecommerce.model.Produto;
+import com.algaworks.ecommerce.model.NotaFiscal;
+import com.algaworks.ecommerce.model.PagamentoCartao;
+import com.algaworks.ecommerce.model.Pedido;
+import com.algaworks.ecommerce.model.StatusPagamento;
 
 public class RelacionamentoOneToOneTest extends EntityManagerTest {
-
+	
 	@Test
 	public void verificarRelacionamento() {
-		Produto produto = entityManager.find(Produto.class, 1);
-		Categoria categoria = entityManager.find(Categoria.class, 1);
+		Pedido pedido = entityManager.find(Pedido.class, 1);
+		
+		PagamentoCartao pagamentoCartao = new PagamentoCartao();
+		pagamentoCartao.setNumero("1234");
+		pagamentoCartao.setStatus(StatusPagamento.PROCESSANDO);
+		pagamentoCartao.setPedido(pedido);
 		
 		entityManager.getTransaction().begin();
-//		categoria.setProdutos(Arrays.asList(produto));
-		produto.setCategorias(Arrays.asList(categoria));
+		entityManager.persist(pagamentoCartao);
 		entityManager.getTransaction().commit();
 		
 		entityManager.clear();
 
-		Categoria categoriaVerificacao = entityManager.find(Categoria.class, categoria.getId());
-		Assert.assertFalse(categoriaVerificacao.getProdutos().isEmpty());
+		Pedido pedidoVerificacao = entityManager.find(Pedido.class, pedido.getId());
+		Assert.assertNotNull(pedidoVerificacao.getPagamento());
 
 	}
+	
+	@Test
+	public void verificarRelacionamentoPedidoNotaFiscal() {
+		Pedido pedido = entityManager.find(Pedido.class, 1);
+		
+		NotaFiscal notaFiscal = new NotaFiscal();
+		notaFiscal.setXml("Teste");
+		notaFiscal.setDataEmissao(new Date());
+		notaFiscal.setPedido(pedido);
+		
+		entityManager.getTransaction().begin();
+		entityManager.persist(notaFiscal);
+		entityManager.getTransaction().commit();
+		
+		entityManager.clear();
+
+		Pedido pedidoVerificacao = entityManager.find(Pedido.class, pedido.getId());
+		Assert.assertNotNull(pedidoVerificacao.getNotaFiscal());
+		
+	}
+	
 
 }

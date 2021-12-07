@@ -1,32 +1,30 @@
 package com.algaworks.ecommerce.relacionamentos;
 
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.algaworks.ecommerce.EntityManagerTest;
-import com.algaworks.ecommerce.model.PagamentoCartao;
-import com.algaworks.ecommerce.model.Pedido;
-import com.algaworks.ecommerce.model.StatusPagamento;
+import com.algaworks.ecommerce.model.Categoria;
+import com.algaworks.ecommerce.model.Produto;
 
 public class RelacionamentoManyToManyTest extends EntityManagerTest {
 
 	@Test
 	public void verificarRelacionamento() {
-		Pedido pedido = entityManager.find(Pedido.class, 1);
-		
-		PagamentoCartao pagamentoCartao = new PagamentoCartao();
-		pagamentoCartao.setNumero("1234");
-		pagamentoCartao.setStatus(StatusPagamento.PROCESSANDO);
-		pagamentoCartao.setPedido(pedido);
+		Produto produto = entityManager.find(Produto.class, 1);
+		Categoria categoria = entityManager.find(Categoria.class, 1);
 		
 		entityManager.getTransaction().begin();
-		entityManager.persist(pagamentoCartao);
+//		categoria.setProdutos(Arrays.asList(produto));
+		produto.setCategorias(Arrays.asList(categoria));
 		entityManager.getTransaction().commit();
 		
 		entityManager.clear();
 
-		Pedido pedidoVerificacao = entityManager.find(Pedido.class, pedido.getId());
-		Assert.assertNotNull(pedidoVerificacao.getPagamento());
+		Categoria categoriaVerificacao = entityManager.find(Categoria.class, categoria.getId());
+		Assert.assertFalse(categoriaVerificacao.getProdutos().isEmpty());
 
 	}
 
