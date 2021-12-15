@@ -15,15 +15,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "pagamento_cartao")
-public class PagamentoCartao {
+public class PagamentoCartao  extends EntidadeBaseInteger {
 
-	@EqualsAndHashCode.Include
-	@Id
-	private Integer id;
-	
 	@MapsId
 	@OneToOne(optional = false)
 	@JoinColumn(name = "pedido_id")
