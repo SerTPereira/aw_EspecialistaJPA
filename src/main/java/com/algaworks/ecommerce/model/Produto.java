@@ -14,8 +14,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import com.algaworks.ecommerce.listener.GenericListener;
@@ -46,6 +49,9 @@ public class Produto {
 	private String nome;
 
 	private String descricao;
+	
+	@Lob
+	private byte[] foto;
 
 	private BigDecimal preco;
 	
@@ -68,4 +74,15 @@ public class Produto {
 	@CollectionTable(name = "produto_atributo", joinColumns = @JoinColumn(name = "produto_id"))
 	private List<Atributo> atributos;
 
+	@PrePersist
+	public void aoPersistir() {
+		System.out.println(">> Callback PrePersist: <<");
+		this.dataCriacao = LocalDateTime.now();
+	}
+	
+	@PreUpdate
+	public void aoAtualziar() {
+		System.out.println(">> Callback PreUpdate: <<");
+		this.dataUltimaAtualizacao = LocalDateTime.now();
+	}
 }
