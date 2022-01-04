@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
@@ -17,6 +18,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.algaworks.ecommerce.listener.GenericListener;
 
@@ -27,7 +29,9 @@ import lombok.Setter;
 @Setter
 @EntityListeners({GenericListener.class})
 @Entity
-@Table(name = "produto")
+@Table(name = "produto", 
+        uniqueConstraints = { @UniqueConstraint(name = "unq_prod_nome", columnNames = {"nome"})},
+        indexes = {@Index(name = "idx_prod_nome", columnList = "nome")})
 public class Produto extends EntidadeBaseInteger {
 
 	@Column(name = "data_criacao", updatable = false)
