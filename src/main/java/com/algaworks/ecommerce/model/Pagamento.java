@@ -1,6 +1,5 @@
 package com.algaworks.ecommerce.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,9 +14,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "pagamento_cartao")
-public class PagamentoCartao  extends Pagamento {
+@Table(name = "pagamento")
+public abstract class Pagamento extends EntidadeBaseInteger {
+
+	@MapsId
+	@OneToOne(optional = false)
+	@JoinColumn(name = "pedido_id")
+	private Pedido pedido;
 	
-	@Column(name = "numero_cartao")
-	private String numeroCartao;
+	@Enumerated(EnumType.STRING)
+	private StatusPagamento status;
+	
 }
