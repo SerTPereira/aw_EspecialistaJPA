@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import com.algaworks.ecommerce.EntityManagerTest;
 import com.algaworks.ecommerce.model.Cliente;
+import com.algaworks.ecommerce.model.SexoCliente;
 
 public class PrimeiroCrudTest extends EntityManagerTest {
 	
@@ -14,6 +15,8 @@ public class PrimeiroCrudTest extends EntityManagerTest {
 		
 //		cliente.setId(3); Comentado pq passou a utilizar IDENTITY id
 		cliente.setNome("Sergio Pereira");
+		cliente.setSexo(SexoCliente.MASCULINO);
+		cliente.setCpf("789");
 		
 		entityManager.getTransaction().begin();
 		entityManager.persist(cliente);
@@ -38,6 +41,7 @@ public class PrimeiroCrudTest extends EntityManagerTest {
 		Cliente cliente = entityManager.find(Cliente.class, 1);
 		
 		cliente.setNome("Fernando Medeiros Silva");
+		cliente.setSexo(SexoCliente.MASCULINO);
 		
 		entityManager.getTransaction().begin();
 		entityManager.merge(cliente);

@@ -1,5 +1,8 @@
 package com.algaworks.ecommerce.conhecendoentitymanager;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -18,6 +21,8 @@ public class CallbackTest extends EntityManagerTest {
 
         pedido.setCliente(cliente);
         pedido.setStatus(StatusPedido.AGUARDANDO);
+        pedido.setDataCriacao(LocalDateTime.now());
+        pedido.setTotal(BigDecimal.TEN);
 
         System.out.println(">> Start Transaction: >>");
         entityManager.getTransaction().begin();

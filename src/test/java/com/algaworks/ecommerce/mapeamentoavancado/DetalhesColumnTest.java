@@ -12,6 +12,7 @@ import com.algaworks.ecommerce.EntityManagerTest;
 import com.algaworks.ecommerce.model.Cliente;
 import com.algaworks.ecommerce.model.EnderecoEntregaPedido;
 import com.algaworks.ecommerce.model.ItemPedido;
+import com.algaworks.ecommerce.model.ItemPedidoId;
 import com.algaworks.ecommerce.model.Pedido;
 import com.algaworks.ecommerce.model.Produto;
 import com.algaworks.ecommerce.model.StatusPedido;
@@ -59,7 +60,12 @@ public class DetalhesColumnTest extends EntityManagerTest {
 	@Test
 	public void impedirInsercaoDaColunaAtualizacaoPedido() {
 		Pedido pedido = new Pedido();
-		ItemPedido item = entityManager.find(ItemPedido.class, 1);
+		
+		ItemPedidoId itemPedidoId = new ItemPedidoId();
+		itemPedidoId.setPedidoId(1);
+		itemPedidoId.setProdutoId(1);
+		
+		ItemPedido item = entityManager.find(ItemPedido.class, itemPedidoId);
 		Cliente cliente = entityManager.find(Cliente.class, 1);
 		EnderecoEntregaPedido enderecoEntrega = new EnderecoEntregaPedido();
 		

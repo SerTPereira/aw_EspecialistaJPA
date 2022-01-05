@@ -12,6 +12,7 @@ import com.algaworks.ecommerce.EntityManagerTest;
 import com.algaworks.ecommerce.model.Atributo;
 import com.algaworks.ecommerce.model.Cliente;
 import com.algaworks.ecommerce.model.Produto;
+import com.algaworks.ecommerce.model.SexoCliente;
 
 
 
@@ -51,6 +52,8 @@ public class ElementCollectionTest extends EntityManagerTest {
 		
 		Cliente cliente = entityManager.find(Cliente.class, 1);
 		cliente.setContatos(Collections.singletonMap("email", "fernando@email.com"));
+		cliente.setCpf("234");
+		cliente.setSexo(SexoCliente.MASCULINO);
 				
 		entityManager.getTransaction().commit();
 		
