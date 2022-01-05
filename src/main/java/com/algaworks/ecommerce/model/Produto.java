@@ -43,7 +43,7 @@ public class Produto extends EntidadeBaseInteger {
 	@Column(length = 100, nullable = false) // nome varchar(100) not null
 	private String nome;
 
-	@Lob  // descrição longtext
+	@Lob  // descriÃ§Ã£o longtext..
 	private String descricao;
 	
 	@Lob

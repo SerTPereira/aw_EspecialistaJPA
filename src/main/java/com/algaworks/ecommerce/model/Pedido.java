@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -37,7 +38,7 @@ import lombok.Setter;
 public class Pedido extends EntidadeBaseInteger {
 	
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "cliente_id")
+	@JoinColumn(name = "cliente_id", nullable = false, foreignKey = @ForeignKey(name = "fk_pedido_cliente"))
 	private Cliente cliente;
 	
 	@Column(name = "data_criacao", updatable = false, nullable = false)
@@ -102,13 +103,13 @@ public class Pedido extends EntidadeBaseInteger {
 	@PostPersist
 	public void aposPersistir() {
 		System.out.println(">> Callback PostPersist: <<");
-		System.out.println("Após persistir Pedido.");
+		System.out.println("Apï¿½s persistir Pedido.");
 	}
 	
 	@PostUpdate
 	public void aposAtualizar() {
 		System.out.println(">> Callback PostUpdate: <<");
-		System.out.println("Após atualizar Pedido.");
+		System.out.println("Apï¿½s atualizar Pedido.");
 	}
 	
 	@PreRemove
@@ -120,13 +121,13 @@ public class Pedido extends EntidadeBaseInteger {
 	@PostRemove
 	public void aposRemover() {
 		System.out.println(">> Callback PostRemove: <<");
-		System.out.println("Após remover Pedido.");
+		System.out.println("Apï¿½s remover Pedido.");
 	}
 	
 	@PostLoad
 	public void aoCarregar() {
 		System.out.println(">> Callback PostLoad: <<");
-		System.out.println("Após carregar Pedido.");
+		System.out.println("Apï¿½s carregar Pedido.");
 	}
 	
 }
