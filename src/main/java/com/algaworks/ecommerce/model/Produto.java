@@ -34,7 +34,7 @@ import lombok.Setter;
         indexes = {@Index(name = "idx_prod_nome", columnList = "nome")})
 public class Produto extends EntidadeBaseInteger {
 
-	@Column(name = "data_criacao", updatable = false)
+	@Column(name = "data_criacao", updatable = false, nullable = false)
 	private LocalDateTime dataCriacao;
 	
 	@Column(name = "data_ultima_atualizacao", insertable = false)
@@ -49,7 +49,6 @@ public class Produto extends EntidadeBaseInteger {
 	@Lob
 	private byte[] foto;
 
-	@Column(precision = 10, scale = 2) // preco decimal(10,2)
 	private BigDecimal preco;
 	
 	@ManyToMany
@@ -63,7 +62,7 @@ public class Produto extends EntidadeBaseInteger {
 	
 	@ElementCollection
 	@CollectionTable(name = "produto_tag", joinColumns = @JoinColumn(name = "produto_id"))
-	@Column(name = "tag")
+	@Column(name = "tag", length = 50, nullable = false)
 	private List<String> tags;
 	
 
