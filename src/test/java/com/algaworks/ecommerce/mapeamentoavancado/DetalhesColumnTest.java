@@ -23,7 +23,7 @@ public class DetalhesColumnTest extends EntityManagerTest {
 	public void impedirInsercaoDaColunaAtualizacao() {
 		Produto produto = new Produto();
 		produto.setNome("Teclado para smartphone");
-		produto.setDescricao("O mais confortável");
+		produto.setDescricao("O mais confortï¿½vel");
 		produto.setPreco(BigDecimal.ONE);
 		produto.setDataCriacao(LocalDateTime.now());
 		produto.setDataUltimaAtualizacao(LocalDateTime.now());

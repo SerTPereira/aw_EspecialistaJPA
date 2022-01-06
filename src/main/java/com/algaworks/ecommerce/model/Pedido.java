@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -103,13 +104,13 @@ public class Pedido extends EntidadeBaseInteger {
 	@PostPersist
 	public void aposPersistir() {
 		System.out.println(">> Callback PostPersist: <<");
-		System.out.println("Ap�s persistir Pedido.");
+		System.out.println("Após persistir Pedido.");
 	}
 	
 	@PostUpdate
 	public void aposAtualizar() {
 		System.out.println(">> Callback PostUpdate: <<");
-		System.out.println("Ap�s atualizar Pedido.");
+		System.out.println("Após atualizar Pedido.");
 	}
 	
 	@PreRemove
@@ -121,13 +122,13 @@ public class Pedido extends EntidadeBaseInteger {
 	@PostRemove
 	public void aposRemover() {
 		System.out.println(">> Callback PostRemove: <<");
-		System.out.println("Ap�s remover Pedido.");
+		System.out.println("Após remover Pedido.");
 	}
 	
 	@PostLoad
 	public void aoCarregar() {
 		System.out.println(">> Callback PostLoad: <<");
-		System.out.println("Ap�s carregar Pedido.");
+		System.out.println("Após carregar Pedido.");
 	}
 	
 }
