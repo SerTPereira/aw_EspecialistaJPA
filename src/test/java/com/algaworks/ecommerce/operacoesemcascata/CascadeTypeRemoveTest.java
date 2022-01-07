@@ -41,7 +41,7 @@ public class CascadeTypeRemoveTest extends EntityManagerTest {
 		Assert.assertNull(pedidoVerificacao);
 	}
 	
-	@Test
+//	@Test
 	public void removerRelacaoProdutoCategoria() {
 		Produto produto = entityManager.find(Produto.class, 1);
 		
@@ -55,6 +55,23 @@ public class CascadeTypeRemoveTest extends EntityManagerTest {
 		
 		Produto produtoVerificacao = entityManager.find(Produto.class, produto.getId());
 		Assert.assertTrue(produtoVerificacao.getCategorias().isEmpty());
+	}
+	
+//	@Test
+	public void removerItensOrfaos() {
+		Pedido pedido = entityManager.find(Pedido.class, 1);
+		
+		Assert.assertFalse(pedido.getItens().isEmpty());
+		
+		entityManager.getTransaction().begin();
+		pedido.getItens().clear();
+		entityManager.getTransaction().commit();
+		
+		entityManager.clear();
+		
+		Pedido pedidoVerificacao = entityManager.find(Pedido.class, pedido.getId());
+		Assert.assertTrue(pedidoVerificacao.getItens().isEmpty());
+		
 	}
 	
 }
