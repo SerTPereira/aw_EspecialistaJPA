@@ -20,3 +20,4 @@ insert into pagamento (pedido_id, status, numero_cartao, codigo_barras,  tipo_pa
 --insert into pagamento_cartao (pedido_id, numero_cartao) values (2, '123');
 
 insert into categoria (id, nome) values (1, 'Eletrônicos');
+insert into categoria (id, nome) values (2, 'Livros');
